@@ -39,10 +39,10 @@ export interface GovProposal {
   };
   status: string;
   final_tally_result: {
-    yes: string;
-    abstain: string;
-    no: string;
-    no_with_veto: string;
+    yes_count: string;
+    abstain_count: string;
+    no_count: string;
+    no_with_veto_count: string;
   };
   submit_time: string;
   deposit_end_time: string;
@@ -59,10 +59,10 @@ export interface VoteOption {
   weight: string;
 }
 export interface Tally {
-  yes: string;
-  abstain: string;
-  no: string;
-  no_with_veto: string;
+  yes_count: string;
+  abstain_count: string;
+  no_count: string;
+  no_with_veto_count: string;
 }
 
 export interface GovVote {
