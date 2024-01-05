@@ -111,7 +111,9 @@ export const useParamStore = defineStore('paramstore', {
       this.staking.items = Object.entries(res.params)
         .map(([key, value]) => ({ subtitle: key, value: value }))
         .filter((item: any) => {
-          if (!['min_commission_rate', 'min_self_delegation'].includes(item.subtitle)) return item;
+          // Display all staking params including min_commission_rate /
+          // min_self_delegation (mainchain surfaces both as gov-tunable).
+          return item;
         });
       Promise.all([this.getStakingPool(), this.getBankTotal(bond_denom)]).then((resArr) => {
         const pool = resArr[0]?.pool;
