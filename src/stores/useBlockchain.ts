@@ -150,7 +150,7 @@ export const useBlockchain = defineStore('blockchain', {
       useBankStore().initial();
       useBaseStore().initial();
       useGovStore().initial();
-      useMintStore().initial();
+      // useMintStore().initial();
       useBlockModule().initial();
       useDistributionStore().initial();
     },
@@ -190,8 +190,8 @@ export const useBlockchain = defineStore('blockchain', {
       }
 
       // Find the case-sensitive name for the chainName, else simply use the parameter-value.
-      const caseSensitiveName = 
-        Object.keys(this.dashboard.chains).find((x) => x.toLowerCase() === name.toLowerCase()) 
+      const caseSensitiveName =
+        Object.keys(this.dashboard.chains).find((x) => x.toLowerCase() === name.toLowerCase())
         || name;
 
       // Update chainName if needed

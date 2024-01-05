@@ -214,7 +214,7 @@ export const useIndexModule = defineStore('module-index', {
     async loadDashboard() {
       this.$reset();
       this.initCoingecko();
-      useMintStore().fetchInflation();
+      // useMintStore().fetchInflation();
       useDistributionStore()
         .fetchCommunityPool()
         .then((x) => {
