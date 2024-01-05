@@ -113,11 +113,11 @@ export const useParamStore = defineStore('paramstore', {
       this.staking.items = Object.entries(res.params)
         .map(([key, value]) => ({ subtitle: key, value: value }))
         .filter((item: any) => {
-          if (
-            !['min_commission_rate', 'min_self_delegation'].includes(
-              item.subtitle
-            )
-          )
+          // if (
+          //   !['min_commission_rate', 'min_self_delegation'].includes(
+          //     item.subtitle
+          //   )
+          // )
             return item;
         });
       Promise.all([this.getStakingPool(), this.getBankTotal(bond_denom)]).then(
@@ -195,7 +195,7 @@ export const useParamStore = defineStore('paramstore', {
       const res = await this.fetchAbciInfo();
 
       localStorage.setItem(`sdk_version_${this.blockchain.chainName}`, res.application_version?.cosmos_sdk_version);
-      
+
       this.appVersion.items = Object.entries(res.application_version).map(
         ([key, value]) => ({ subtitle: key, value: value })
       );
