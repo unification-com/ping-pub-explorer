@@ -135,7 +135,7 @@ export const useBlockchain = defineStore('blockchain', {
       useBankStore().initial();
       useBaseStore().initial();
       useGovStore().initial();
-      useMintStore().initial();
+      // useMintStore().initial();
       useBlockModule().initial();
       useDistributionStore().initial();
     },
