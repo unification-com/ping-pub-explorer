@@ -1,0 +1,35 @@
+{
+  "chain_name": "unification",
+  "registry_name": "unification",
+  "coingecko": "unification",
+  "api": [
+    {"provider": "unification", "address": "https://rest.unification.io"},
+    {"provider": "chainmasters", "address": "https://rest.unification.chainmasters.ninja"}
+  ],
+  "rpc": [
+    {"provider": "unification", "address": "https://rpc1.unification.io"},
+    {"provider": "chainmasters", "address": "https://rpc.unification.chainmasters.ninja"}
+  ],
+  "grpc": [
+    {"provider": "unification", "address": "https://grpc.unification.io"},
+    {"provider": "chainmasters", "address": "https://grpc.unification.chainmasters.ninja"}
+  ],
+  "features": ["dashboard", "governance", "staking", "blocks", "uptime", "ibc", "supply", "parameters", "consensus", "state-sync", "widget"],
+  "sdk_version": "v0.46.15",
+  "coin_type": "5555",
+  "min_tx_fee": "25",
+  "addr_prefix": "und",
+  "logo": "https://raw.githubusercontent.com/unification-com/assets/main/icons/svg/unification_icon_blue_circle.svg",
+  "assets": [{
+    "base": "nund",
+    "symbol": "FUND",
+    "exponent": "9",
+    "coingecko_id": "unification",
+    "logo": "https://raw.githubusercontent.com/unification-com/assets/main/icons/svg/unification_icon_blue_circle.svg"
+  }],
+  "keplr_price_step": {
+    "low": 100,
+    "average": 200,
+    "high": 300
+  }
+}
