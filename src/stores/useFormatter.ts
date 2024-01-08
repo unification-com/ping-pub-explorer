@@ -72,7 +72,7 @@ export const useFormatter = defineStore('formatter', {
       return trace;
     },
     async fetchDenomMetadata(denom: string) {
-      if(this.loading.includes(denom)) return 
+      if(this.loading.includes(denom)) return
       this.loading.push(denom)
       const asset = await get(`https://metadata.ping.pub/metadata/${denom}`) as Asset
       this.ibcMetadata[denom] = asset
@@ -127,7 +127,7 @@ export const useFormatter = defineStore('formatter', {
       if(!token || !token.denom) return 0
 
       // find the symbol
-      const symbol = this.dashboard.coingecko[token.denom]?.symbol || token.denom 
+      const symbol = this.dashboard.coingecko[token.denom]?.symbol || token.denom
       // convert denomination to symbol
       const exponent = this.dashboard.coingecko[symbol?.toLowerCase()]?.exponent || this.specialDenom(token.denom);
       // caculate amount of symbol
@@ -136,7 +136,6 @@ export const useFormatter = defineStore('formatter', {
     },
     tokenValueNumber(token?: Coin) {
       if(!token || !token.denom) return 0
-
       const amount = this.tokenAmountNumber(token)
       const value = amount * this.price(token.denom)
       return value
@@ -147,7 +146,7 @@ export const useFormatter = defineStore('formatter', {
     formatToken2(token: { denom: string; amount: string }, withDenom = true) {
       return this.formatToken(token, true, '0,0.[00]');
     },
-    
+
     findGlobalAssetConfig(denom: string) {
       const chains = Object.values(this.dashboard.chains)
       for ( let i =0; i < chains.length; i++ ) {
@@ -197,7 +196,7 @@ export const useFormatter = defineStore('formatter', {
             if (x.exponent >= unit.exponent) {
               unit = x;
             }
-          });          
+          });
           return unit.denom;
         }
         return denom;
@@ -313,6 +312,15 @@ export const useFormatter = defineStore('formatter', {
         (x) => consensusPubkeyToHexAddress(x.consensus_pubkey) === txt
       );
       return validator?.description?.moniker;
+    },
+    validatorOperatorAddress(address: string) {
+      if (!address) return address;
+
+      const txt = toHex(fromBase64(address)).toUpperCase();
+      const validator = this.staking.validators.find(
+          (x) => consensusPubkeyToHexAddress(x.consensus_pubkey) === txt
+      );
+      return validator?.operator_address;
     },
     // find validator by operator address
     validatorFromBech32(address: string) {
