@@ -182,10 +182,10 @@ export const useIndexModule = defineStore('module-index', {
           change: 0,
         },
         {
-          title: 'Inflation',
+          title: 'Price',
           color: 'success',
           icon: 'mdi-chart-multiple',
-          stats: formatter.formatDecimalToPercent(mintStore.inflation),
+          stats: (formatter.price("nund") === 0) ? "--" : `$${formatter.price("nund")}`,
           change: 0,
         },
         {
