@@ -42,6 +42,7 @@ import type {
   Validator,
 } from '@/types/staking';
 import type { PaginatedTxs, Tx, TxResponse } from '@/types';
+import type { StreamParams} from "@/types/stream";
 import semver from 'semver'
 export interface Request<T> {
   url: string;
@@ -75,7 +76,7 @@ export interface RequestRegistry extends AbstractRegistry {
   distribution_community_pool: Request<{ pool: Coin[] }>;
   distribution_delegator_rewards: Request<{
     rewards: {
-      validator_address: string, 
+      validator_address: string,
       reward: Coin[]
     }[],
     total: Coin[]
@@ -152,6 +153,9 @@ export interface RequestRegistry extends AbstractRegistry {
   ibc_core_connection_connections_connection_id: Request<ConnectionWithProof>;
   ibc_core_connection_connections_connection_id_client_state: Request<ClientStateWithProof>;
   interchain_security_ccv_provider_validator_consumer_addr: Request<{consumer_address: string}>
+
+  // Payment Stream
+  stream_params: Request<StreamParams>;
 }
 
 export function adapter<T>(source: any): Promise<T> {

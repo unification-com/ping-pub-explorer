@@ -38,6 +38,8 @@ onMounted(() => {
     <CardParameter :cardItem="store.distribution" />
     <!-- Slashing Parameters -->
     <CardParameter :cardItem="store.slashing" />
+    <!-- Stream Parameters -->
+    <CardParameter :cardItem="store.stream" />
     <!-- Application Version -->
     <div class="bg-base-100 px-4 pt-3 pb-4 rounded-sm mt-6">
       <div class="text-base mb-3 text-main">{{ store.appVersion?.title }}</div>
