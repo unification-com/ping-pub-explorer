@@ -16,6 +16,7 @@ import {
 import { useBlockModule } from '@/modules/[chain]/block/block';
 import { DEFAULT } from '@/libs';
 import { hexToRgb, rgbToHsl } from '@/libs/utils';
+import {useStreamStore} from "@/stores/useStreamStore";
 
 export const useBlockchain = defineStore('blockchain', {
   state: () => {
@@ -138,6 +139,7 @@ export const useBlockchain = defineStore('blockchain', {
       // useMintStore().initial();
       useBlockModule().initial();
       useDistributionStore().initial();
+      useStreamStore().initial();
     },
 
     randomEndpoint(chainName: string): Endpoint | undefined {

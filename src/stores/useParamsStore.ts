@@ -72,6 +72,10 @@ export const useParamStore = defineStore('paramstore', {
       title: 'Node Information',
       items: {},
     },
+    stream: {
+      title: 'Payment Stream Parameters',
+      items: [] as Array<any>,
+    },
   }),
   getters: {
     blockchain() {
@@ -87,6 +91,7 @@ export const useParamStore = defineStore('paramstore', {
       this.handleDistributionParams();
       this.handleGovernanceParams();
       this.handleAbciInfo();
+      this.handleStreamParams();
     },
     async handleBaseBlockLatest() {
       try {
@@ -182,6 +187,12 @@ export const useParamStore = defineStore('paramstore', {
         value: value,
       }));
     },
+    async handleStreamParams() {
+      const res = await this.getStreamParams();
+      this.stream.items = Object.entries(res.params).map(
+          ([key, value]) => ({ subtitle: key, value: value })
+      );
+    },
     async getBaseTendermintBlockLatest() {
       return await this.blockchain.rpc?.getBaseBlockLatest();
     },
@@ -221,6 +232,9 @@ export const useParamStore = defineStore('paramstore', {
     },
     async fetchAbciInfo() {
       return this.blockchain.rpc?.getBaseNodeInfo();
+    },
+    async getStreamParams() {
+      return await this.blockchain.rpc?.getStreamParams();
     },
   },
 });
