@@ -1,0 +1,32 @@
+{
+  "chain_name": "u",
+  "registry_name": "unification TestNet",
+  "coingecko": "unification",
+  "api": [
+    {"provider": "unification", "address": "https://rest-testnet.unification.io"}
+  ],
+  "rpc": [
+    {"provider": "unification", "address": "https://rpc-testnet.unification.io"}
+  ],
+  "grpc": [
+    {"provider": "unification", "address": "https://grpc-testnet.unification.io"}
+  ],
+  "features": ["dashboard", "governance", "staking", "blocks", "uptime", "ibc", "supply", "parameters", "consensus", "state-sync"],
+  "sdk_version": "v0.47.13",
+  "coin_type": "5555",
+  "min_tx_fee": "25",
+  "addr_prefix": "und",
+  "logo": "https://raw.githubusercontent.com/unification-com/assets/main/icons/svg/unification_icon_blue_circle.svg",
+  "assets": [{
+    "base": "nund",
+    "symbol": "FUND",
+    "exponent": "9",
+    "coingecko_id": "unification",
+    "logo": "https://raw.githubusercontent.com/unification-com/assets/main/icons/svg/unification_icon_blue_circle.svg"
+  }],
+  "keplr_price_step": {
+    "low": 100,
+    "average": 200,
+    "high": 300
+  }
+}
