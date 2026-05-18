@@ -15,7 +15,7 @@
     {"provider": "chainmasters", "address": "https://grpc.unification.chainmasters.ninja"}
   ],
   "features": ["dashboard", "governance", "staking", "blocks", "tx", "uptime", "ibc", "supply", "parameters", "consensus", "state-sync", "widget"],
-  "sdk_version": "v0.46.15",
+  "sdk_version": "v0.54.3",
   "coin_type": "5555",
   "min_tx_fee": "25",
   "addr_prefix": "und",
