@@ -39,7 +39,6 @@ import type {
   Validator,
 } from '@/types/staking';
 import type { PaginatedTxs, Tx, TxResponse } from '@/types';
-import type { StreamParams } from '@/types/stream';
 import semver from 'semver';
 export interface Request<T> {
   url: string;
@@ -161,8 +160,6 @@ export interface RequestRegistry extends AbstractRegistry {
   interchain_security_consumer_validators: Request<{
     validators: { provider_address: string; consumer_key: { ed25519: string }; power: string }[];
   }>;
-  // Payment Stream (Unification)
-  stream_params: Request<StreamParams>;
 }
 
 export function adapter<T>(source: any): Promise<T> {
