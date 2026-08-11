@@ -65,10 +65,13 @@ blockchain.$subscribe((_m, s) => {
       </div>
     </div>
 
-    <!-- chain stats (Price entry filtered out — coingecko data isn't load-bearing
-         for the Unification dashboard, and an empty $-- card was visually noisy) -->
+    <!-- chain stats: height, supply, bonded, Price, community pool, inflation.
+         Price was previously filtered out because the card rendered "$--"; the feed does
+         resolve (chains/*/unification.json maps base `nund` -> coingecko_id `unification`),
+         so it is shown again. NB on TestNet this is the MainNet FUND market price — the
+         coingecko id is the same in both chain configs. -->
     <div class="grid grid-cols-1 gap-4 md:!grid-cols-3 lg:!grid-cols-6">
-      <div v-for="(item, key) in store.stats.filter((s: any) => s.title !== 'Price')" :key="key">
+      <div v-for="(item, key) in store.stats" :key="key">
         <CardStatisticsVertical v-bind="item" />
       </div>
     </div>
@@ -89,7 +92,7 @@ blockchain.$subscribe((_m, s) => {
     <!-- recent blocks -->
     <div class="bg-base-100 rounded mt-4 shadow">
       <div class="px-4 pt-4 pb-2 text-lg font-semibold text-main">
-        {{ $t('block.recent') }} {{ $t('account.blocks') }}
+        {{ $t('block.recent') }} {{ $t('module.blocks') }}
       </div>
       <table class="table w-full table-compact">
         <thead class="bg-base-200">
