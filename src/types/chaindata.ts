@@ -62,6 +62,8 @@ export interface LocalChainConfig {
     address_limit: number;
     fees: string;
   };
+  // Unification fork: optional external faucet URL (see ChainConfig below).
+  faucet_url?: string;
 }
 
 // Chain config structure of cosmos.directory
@@ -141,4 +143,8 @@ export interface ChainConfig {
     address_limit: number;
     fees: string;
   };
+  // Unification fork: optional URL of an external faucet. When present, the
+  // sidebar's TestNet faucet link points here (target="_blank") instead of the
+  // in-app /faucet route. Leave unset to keep upstream's behaviour.
+  faucet_url?: string;
 }

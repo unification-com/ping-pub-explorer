@@ -72,6 +72,10 @@ export const useParamStore = defineStore('paramstore', {
       title: 'Node Information',
       items: {},
     },
+    stream: {
+      title: 'Payment Stream Parameters',
+      items: [] as Array<any>,
+    },
   }),
   getters: {
     blockchain() {
@@ -87,6 +91,7 @@ export const useParamStore = defineStore('paramstore', {
       this.handleDistributionParams();
       this.handleGovernanceParams();
       this.handleAbciInfo();
+      this.handleStreamParams();
     },
     async handleBaseBlockLatest() {
       try {
@@ -111,7 +116,9 @@ export const useParamStore = defineStore('paramstore', {
       this.staking.items = Object.entries(res.params)
         .map(([key, value]) => ({ subtitle: key, value: value }))
         .filter((item: any) => {
-          if (!['min_commission_rate', 'min_self_delegation'].includes(item.subtitle)) return item;
+          // Display all staking params including min_commission_rate /
+          // min_self_delegation (mainchain surfaces both as gov-tunable).
+          return item;
         });
       Promise.all([this.getStakingPool(), this.getBankTotal(bond_denom)]).then((resArr) => {
         const pool = resArr[0]?.pool;
@@ -180,6 +187,12 @@ export const useParamStore = defineStore('paramstore', {
         value: value,
       }));
     },
+    async handleStreamParams() {
+      const res = await this.getStreamParams();
+      this.stream.items = Object.entries(res.params).map(
+          ([key, value]) => ({ subtitle: key, value: value })
+      );
+    },
     async getBaseTendermintBlockLatest() {
       return await this.blockchain.rpc?.getBaseBlockLatest();
     },
@@ -219,6 +232,9 @@ export const useParamStore = defineStore('paramstore', {
     },
     async fetchAbciInfo() {
       return this.blockchain.rpc?.getBaseNodeInfo();
+    },
+    async getStreamParams() {
+      return await this.blockchain.rpc?.getStreamParams();
     },
   },
 });

@@ -13,6 +13,7 @@ import {
 } from './api/registry';
 import { PageRequest, type Coin } from '@/types';
 import semver from 'semver';
+import type { StreamParams } from '@/types/stream';
 
 export class BaseRestClient<R extends AbstractRegistry> {
   version: string;
@@ -364,10 +365,16 @@ export class CosmosRestClient extends BaseRestClient<RequestRegistry> {
       provider_address,
     });
   }
+
   async getInterchainSecurityProviderOptedInValidators(chain_id: string) {
     return this.request(this.registry.interchain_security_provider_opted_in_validators, { chain_id });
   }
   async getInterchainSecurityConsumerValidators(chain_id: string) {
     return this.request(this.registry.interchain_security_consumer_validators, { chain_id });
+  }
+
+  // Payment Stream
+  async getStreamParams() {
+    return this.request({url: "/mainchain/stream/v1/params", adapter} as Request<{ params: StreamParams}>, {});
   }
 }

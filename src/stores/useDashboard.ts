@@ -64,6 +64,7 @@ export function convertFromLocal(lc: LocalChainConfig): ChainConfig {
   conf.keplrPriceStep = lc.keplr_price_step;
   conf.themeColor = lc.theme_color;
   conf.faucet = lc.faucet;
+  conf.faucet_url = lc.faucet_url;
   return conf;
 }
 
@@ -209,7 +210,13 @@ export const useDashboard = defineStore('dashboard', {
         this.networkType === NetworkType.Mainnet
           ? import.meta.glob('../../chains/mainnet/*.json', { eager: true })
           : import.meta.glob('../../chains/testnet/*.json', { eager: true });
+      // Unification fork: optional VITE_CHAINS_ALLOWLIST env-var keeps the
+      // upstream chain JSONs in-tree (for frictionless future rebases) but
+      // shows only the listed chain_names at runtime. Comma-separated; empty
+      // = upstream behaviour (show everything).
+      const allowlist = (import.meta.env.VITE_CHAINS_ALLOWLIST || '').split(',').map((s: string) => s.trim()).filter(Boolean);
       Object.values<LocalChainConfig>(source).forEach((x: LocalChainConfig) => {
+        if (allowlist.length > 0 && !allowlist.includes(x.chain_name)) return;
         this.chains[x.chain_name] = convertFromLocal(x);
         if (!this.chains[x.chain_name].networkType) {
           this.chains[x.chain_name].networkType = this.networkType.toString().toLowerCase();
@@ -224,7 +231,10 @@ export const useDashboard = defineStore('dashboard', {
         network === NetworkType.Mainnet
           ? import.meta.glob('../../chains/mainnet/*.json', { eager: true })
           : import.meta.glob('../../chains/testnet/*.json', { eager: true });
+      // Unification fork: see loadingFromLocal above for filter rationale.
+      const allowlist = (import.meta.env.VITE_CHAINS_ALLOWLIST || '').split(',').map((s: string) => s.trim()).filter(Boolean);
       Object.values<LocalChainConfig>(source).forEach((x: LocalChainConfig) => {
+        if (allowlist.length > 0 && !allowlist.includes(x.chain_name)) return;
         config[x.chain_name] = convertFromLocal(x);
         if (!config[x.chain_name].networkType) {
           config[x.chain_name].networkType = network.toString().toLowerCase();

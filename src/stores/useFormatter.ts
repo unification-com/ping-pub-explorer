@@ -315,6 +315,15 @@ export const useFormatter = defineStore('formatter', {
       const validator = this.staking.validators.find((x) => consensusPubkeyToHexAddress(x.consensus_pubkey) === txt);
       return validator?.description?.moniker;
     },
+    validatorOperatorAddress(address: string) {
+      if (!address) return address;
+
+      const txt = toHex(fromBase64(address)).toUpperCase();
+      const validator = this.staking.validators.find(
+          (x) => consensusPubkeyToHexAddress(x.consensus_pubkey) === txt
+      );
+      return validator?.operator_address;
+    },
     // find validator by operator address
     validatorFromBech32(address: string) {
       if (!address) return address;

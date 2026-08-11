@@ -179,7 +179,19 @@ const show_ad = computed(() => {
               v-if="index === 0 && dashboard.networkType === NetworkType.Testnet"
               class="menu bg-base-100 w-full !p-0"
             >
+              <a
+                v-if="blockchain.current?.faucet_url"
+                class="hover:bg-gray-100 dark:hover:bg-[#373f59] rounded cursor-pointer px-3 py-2 flex items-center"
+                :href="blockchain.current.faucet_url"
+                target="_blank"
+                rel="noopener"
+              >
+                <Icon icon="mdi:chevron-right" class="mr-2 ml-3"></Icon>
+                <div class="text-base capitalize text-gray-500 dark:text-gray-300">Faucet</div>
+                <div class="badge badge-sm text-white border-none badge-error ml-auto">New</div>
+              </a>
               <RouterLink
+                v-else
                 class="hover:bg-gray-100 dark:hover:bg-[#373f59] rounded cursor-pointer px-3 py-2 flex items-center"
                 :to="`/${blockchain.chainName}/faucet`"
               >

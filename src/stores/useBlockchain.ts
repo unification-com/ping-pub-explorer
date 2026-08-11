@@ -16,6 +16,7 @@ import {
 import { useBlockModule } from '@/modules/[chain]/block/block';
 import { DEFAULT } from '@/libs';
 import { hexToRgb, rgbToHsl } from '@/libs/utils';
+import {useStreamStore} from "@/stores/useStreamStore";
 
 export const useBlockchain = defineStore('blockchain', {
   state: () => {
@@ -102,23 +103,23 @@ export const useBlockchain = defineStore('blockchain', {
       // combine all together
       return [
         ...currNavItem,
-        { heading: 'Ecosystem' } as NavSectionTitle,
-        {
-          title: 'Favorite',
-          children: favNavItems,
-          badgeContent: favNavItems.length,
-          badgeClass: 'bg-primary',
-          i18n: true,
-          icon: { icon: 'mdi-star', size: '22' },
-        } as NavGroup,
-        {
-          title: 'All Blockchains',
-          to: { path: '/' },
-          badgeContent: this.dashboard.length,
-          badgeClass: 'bg-primary',
-          i18n: true,
-          icon: { icon: 'mdi-grid', size: '22' },
-        } as NavLink,
+        // { heading: 'Ecosystem' } as NavSectionTitle,
+        // {
+        //   title: 'Favorite',
+        //   children: favNavItems,
+        //   badgeContent: favNavItems.length,
+        //   badgeClass: 'bg-primary',
+        //   i18n: true,
+        //   icon: { icon: 'mdi-star', size: '22' },
+        // } as NavGroup,
+        // {
+        //   title: 'All Blockchains',
+        //   to: { path: '/' },
+        //   badgeContent: this.dashboard.length,
+        //   badgeClass: 'bg-primary',
+        //   i18n: true,
+        //   icon: { icon: 'mdi-grid', size: '22' },
+        // } as NavLink,
       ];
     },
   },
@@ -135,9 +136,10 @@ export const useBlockchain = defineStore('blockchain', {
       useBankStore().initial();
       useBaseStore().initial();
       useGovStore().initial();
-      useMintStore().initial();
+      // useMintStore().initial();
       useBlockModule().initial();
       useDistributionStore().initial();
+      useStreamStore().initial();
     },
 
     randomEndpoint(chainName: string): Endpoint | undefined {
